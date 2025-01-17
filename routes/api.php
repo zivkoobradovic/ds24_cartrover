@@ -20,3 +20,7 @@ Route::post('/integration/cartrover/{vendor}/{auth}', function (Request $request
     ];
     return json_encode($response, JSON_PRETTY_PRINT);
 })->name('ipn_url');
+
+Route::post('/integration/cartrover/', function (Request $request, $vendor, $auth) {
+   return response(200);
+});
