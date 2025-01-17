@@ -22,5 +22,5 @@ Route::post('/integration/cartrover/{vendor}/{auth}', function (Request $request
 })->name('ipn_url');
 
 Route::post('/integration/cartrover/', function (Request $request, $vendor, $auth) {
-   return response(200);
+   echo 'No vendor or auth provided.';
 });
