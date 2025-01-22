@@ -10,12 +10,13 @@ class CartroverIntegrationController extends Controller
 {
     public function receive(Request $request, Vendor $vendor, string $auth)
     {
-        if($vendor->cartroverIntegration()->where('auth', $auth)->exists()) {
-                $cartroverIntegration = $vendor->cartroverIntegration()->where('auth', $auth)->first();
+        $decoded_auth = base64_decode(strtr($auth, '-_', '+/'));
+
+        if ($vendor->cartroverIntegration()->where('auth', $decoded_auth)->exists()) {
+            $cartroverIntegration = $vendor->cartroverIntegration()->where('auth', $decoded_auth)->first();
             $cartroverIntegration->digistoreOrder()->create($request->all());
         } else {
-           echo 'Vendor does not exist';
-
+            echo 'Vendor does not exist';
         }
     }
 }

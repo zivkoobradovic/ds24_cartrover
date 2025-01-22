@@ -92,7 +92,9 @@ class CreateCartroverIntegrationComponent extends Component
                 'name' => $this->ds24_user->user_name,
             ]);
         }
-        $auth = base64_encode($this->http_header . ':' . $this->ipn_pass);
+
+        $auth = $this->http_header . ':' . $this->ipn_pass;
+        $ipn_url = route('ipn_url', ['vendor' => $this->ds24_user->user_name, 'auth' => rtrim(strtr(base64_encode($auth), '+/', '-_'), '=')]);
 
         $this->saved_integration = $vendor->cartroverIntegration()->create([
             'name' => $this->name,
@@ -104,7 +106,7 @@ class CreateCartroverIntegrationComponent extends Component
             'ds24_api_key' => $this->ds24_api_key,
             'cr_api_user' => $this->cr_api_user,
             'cr_api_pass' => $this->cr_api_pass,
-            'ipn_url' => route('ipn_url', ['vendor' => $this->ds24_user->user_name, 'auth' => $auth,])
+            'ipn_url' => $ipn_url,
         ]);
 
         $this->displayModal = true;
