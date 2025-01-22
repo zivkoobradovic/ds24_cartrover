@@ -94,7 +94,7 @@ class CreateCartroverIntegrationComponent extends Component
         }
         $auth = base64_encode($this->http_header . ':' . $this->ipn_pass);
 
-        $this->saved_integration = $vendor->cartroverIntegrations()->create([
+        $this->saved_integration = $vendor->cartroverIntegration()->create([
             'name' => $this->name,
             'vendor_id' => $this->ds24_user->user_name,
             'ipn_pass' => $this->ipn_pass,
