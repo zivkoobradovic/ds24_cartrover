@@ -12,7 +12,7 @@ class CartroverIntegrationController extends Controller
     {
         if ($vendor->cartroverIntegration()->where('auth', $auth)->exists()) {
             $cartroverIntegration = $vendor->cartroverIntegration()->where('auth', $auth)->first();
-            return response($cartroverIntegration);
+            return response($request);
             $digistore24Order = $cartroverIntegration->digistoreOrder()->create($request->all());
         } else {
             echo 'Vendor does not exist';
