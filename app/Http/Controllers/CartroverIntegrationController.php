@@ -13,6 +13,8 @@ class CartroverIntegrationController extends Controller
         $decoded_auth = base64_decode(strtr($auth, '-_', '+/'));
 
         if ($vendor->cartroverIntegration()->where('auth', $decoded_auth)->exists()) {
+            Log::info('DS24 request: ' . $request->method() . " - " . $request->all());
+
             return response('ok');
             // $cartroverIntegration = $vendor->cartroverIntegration()->where('auth', $decoded_auth)->first();
             // $cartroverIntegration->digistoreOrder()->create($request->all());
