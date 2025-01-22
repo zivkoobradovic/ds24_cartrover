@@ -13,12 +13,17 @@ class CartroverIntegrationController extends Controller
         $decoded_auth = base64_decode(strtr($auth, '-_', '+/'));
 
         if ($vendor->cartroverIntegration()->where('auth', $decoded_auth)->exists()) {
-            Log::info('DS24 request: ' . response()->json([
-                'url' => $request->fullUrl(),
-                'method' => $request->method(),
-                'headers' => $request->headers->all(),
-                'body' => $request->all(),
-            ]));
+            if($request->event == 'connection_test') {
+                return response('Connection success');
+            } elseif($request->event == 'on_payment') {
+                //
+            }
+            // Log::info('DS24 request: ' . response()->json([
+            //     'url' => $request->fullUrl(),
+            //     'method' => $request->method(),
+            //     'headers' => $request->headers->all(),
+            //     'body' => $request->all(),
+            // ]));
 
             return response('ok');
             // $cartroverIntegration = $vendor->cartroverIntegration()->where('auth', $decoded_auth)->first();
