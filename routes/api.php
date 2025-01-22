@@ -9,7 +9,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/integration/cartrover/{vendor}/{auth}', [CartroverIntegrationController::class, 'receive'])->name('ipn_url');
+Route::post('/integration/cartrover/{vendor:name}/{auth}', [CartroverIntegrationController::class, 'receive'])->name('ipn_url');
 
 // Route::post('/integration/cartrover/{vendor}/{auth}', function (Request $request, $vendor, $auth) {
 
