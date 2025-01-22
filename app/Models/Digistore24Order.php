@@ -9,6 +9,8 @@ class Digistore24Order extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
 
     public function CartroverIntegration()
     {

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Vendor;
 use App\Services\Digistore24Service;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Route::model('vendor', Vendor::class);
     }
 }

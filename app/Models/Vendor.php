@@ -10,7 +10,12 @@ class Vendor extends Model
     use HasFactory;
     public $fillable = ['name'];
 
-    public function cartroverIntegrations()
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    public function cartroverIntegration()
     {
         return $this->hasMany(CartroverIntegration::class);
     }
