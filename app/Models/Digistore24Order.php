@@ -14,7 +14,7 @@ class Digistore24Order extends Model
 
     public function CartroverIntegration()
     {
-        return $this->belongsTo(CartroverIntegration::class, 'digistore_order_id', 'order_id');
+        return $this->belongsTo(CartroverIntegration::class, 'cartrover_integration_id');
     }
 
     public function CartroverOrder()

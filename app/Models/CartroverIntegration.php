@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\Log;
+use App\Services\Digistore24Service;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
+use App\Services\Digistore24\Digistore24OrderService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CartroverIntegration extends Model
@@ -33,12 +35,12 @@ class CartroverIntegration extends Model
 
     public function digistoreOrder()
     {
-        return $this->hasMany(Digistore24Order::class, 'order_id', 'digistore_order_id');
+        return $this->hasMany(Digistore24Order::class, 'cartrover_integration_id', 'id');
     }
 
     public function cartroverOrder()
     {
-        return $this->hasMany(CartroverOrder::class, 'cartrover_integration_id', 'id');
+        return $this->hasMany(CartroverOrder::class);
     }
 
     /**
@@ -49,7 +51,7 @@ class CartroverIntegration extends Model
      */
     public function createDigistoreOrder(array $data)
     {
-        return $this->digistore24Order()->create($data);
+        return $this->digistoreOrder()->create($data);
     }
 
     /**
@@ -70,6 +72,11 @@ class CartroverIntegration extends Model
             'cartrover_order_id' => $apiResponse['cartrover_order_id'],
             'status' => $apiResponse['status'] ?? 'pending',
         ]);
+    }
+
+    public function processDS24Payload($request) {
+        $order = (new Digistore24OrderService($request))->DS24OrderHandler($this);
+        dd($order);
     }
 
 

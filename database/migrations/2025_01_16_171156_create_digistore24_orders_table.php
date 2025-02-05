@@ -15,8 +15,26 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cartrover_integration_id')->constrained()->onDelete('cascade');
             $table->string('order_id')->unique();
-            $table->string('product_name');
-            $table->integer('quantity');
+            $table->string('buyer_email');
+
+            $table->string('buyer_first_name');
+            $table->string('buyer_last_name');
+            $table->string('buyer_address_street');
+            $table->string('buyer_address_street2')->nullable();
+            $table->string('buyer_address_phone_no')->nullable();
+            $table->string('buyer_address_company')->nullable();
+            $table->string('buyer_address_city');
+            $table->string('buyer_address_zipcode');
+            $table->string('buyer_address_state');
+            $table->string('buyer_address_country');
+            $table->string('address_first_name');
+            $table->string('address_last_name');
+
+            $table->text('product_details');
+            $table->date('order_date');
+            $table->time('order_time');
+            $table->string('pay_method');
+            $table->text('json_order');
             $table->timestamps();
         });
     }
